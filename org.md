@@ -163,7 +163,8 @@ Select * from Worker where year(JOINING_DATE) = 2014 and month(JOINING_DATE) = 2
 ```sql
 SELECT COUNT(*) FROM worker WHERE DEPARTMENT = 'Admin';
 ```
-At this point, you have acquired a good understanding of the basics of SQL, let’s move on to some more intermediate-level SQL query questions. These questions will require us to use more advanced SQL syntax and concepts, such as GROUP BY, HAVING, and ORDER BY.
+##### At this point, you have acquired a good understanding of the basics of SQL, let’s move on to some more intermediate-level SQL query questions. 
+##### These questions will require us to use more advanced SQL syntax and concepts, such as GROUP BY, HAVING, and ORDER BY.
 ### Q-22. Write an SQL query to fetch worker names with salaries >= 50000 and <= 100000.
 
 ```sql
@@ -214,11 +215,11 @@ SELECT * INTO WorkerClone FROM Worker;
 ```
 
 The general way to clone a table without information is:
-
+```sql
 SELECT * INTO WorkerClone FROM Worker WHERE 1 = 0;
 
 An alternate way to clone a table (for MySQL) without data is:
-
+```sql
 CREATE TABLE WorkerClone LIKE Worker;
 
 ### Q-29. Write an SQL query to fetch intersecting records of two tables.
@@ -226,7 +227,7 @@ CREATE TABLE WorkerClone LIKE Worker;
 Ans.
 
 The required query is:
-
+```sql
 (SELECT * FROM Worker)
 INTERSECT
 (SELECT * FROM WorkerClone);
@@ -236,59 +237,56 @@ INTERSECT
 Ans.
 
 The required query is:
-
+```sql
 SELECT * FROM Worker
 MINUS
 SELECT * FROM Title;
 
 ### Q-31. Write an SQL query to show the current date and time.
 
-Ans.
-
-The following MySQL query returns the current date:
-
+#### The following MySQL query returns the current date:
+```sql
 SELECT CURDATE();
-
-And the following MySQL query returns the current date and time:
-
+```
+#### And the following MySQL query returns the current date and time:
+```sql
 SELECT NOW();
-
-Here is a SQL Server query that returns the current date and time:
-
+```
+#### Here is a SQL Server query that returns the current date and time:
+```sql
 SELECT getdate();
+```
 
-Find this Oracle query that also returns the current date and time:
-
+#### Find this Oracle query that also returns the current date and time:
+```sql
 SELECT SYSDATE FROM DUAL;
-
+```
 ### Q-32. Write an SQL query to show the top n (say 10) records of a table.
 
-Ans.
-
-MySQL query to return the top n records using the LIMIT method:
-
+#### MySQL query to return the top n records using the LIMIT method:
+```sql
 SELECT * FROM Worker ORDER BY Salary DESC LIMIT 10;
-
-SQL Server query to return the top n records using the TOP command:
-
+```
+#### SQL Server query to return the top n records using the TOP command:
+```sql
 SELECT TOP 10 * FROM Worker ORDER BY Salary DESC;
-
-Oracle query to return the top n records with the help of ROWNUM:
-
+```
+#### Oracle query to return the top n records with the help of ROWNUM:
+```sql
 SELECT * FROM (SELECT * FROM Worker ORDER BY Salary DESC)
 WHERE ROWNUM <= 10;
-
-Now, you should have a solid foundation in intermediate SQL, let’s take a look at some more advanced SQL query questions. These questions will require us to use more complex SQL syntax and concepts, such as nested queries, joins, unions, and intersects.
+```
+#### Now, you should have a solid foundation in intermediate SQL,
+#### let’s take a look at some more advanced SQL query questions.
+#### These questions will require us to use more complex SQL syntax and concepts, such as nested queries, joins, unions, and intersects.
 ### Q-33. Write an SQL query to determine the nth (say n=5) highest salary from a table.
 
-Ans.
-
-MySQL query to find the nth highest salary:
-
+### MySQL query to find the nth highest salary:
+```sql
 SELECT Salary FROM Worker ORDER BY Salary DESC LIMIT n-1,1;
-
-SQL Server query to find the nth highest salary:
-
+```
+#### SQL Server query to find the nth highest salary:
+```sql
 SELECT TOP 1 Salary
 FROM (
  SELECT DISTINCT TOP n Salary
@@ -296,13 +294,11 @@ FROM (
  ORDER BY Salary DESC
  )
 ORDER BY Salary ASC;
-
+```
 ### Q-34. Write an SQL query to determine the 5th highest salary without using the TOP or limit method.
 
-Ans.
-
-The following query is using the correlated subquery to return the 5th highest salary:
-
+#### The following query is using the correlated subquery to return the 5th highest salary:
+```sql
 SELECT Salary
 FROM Worker W1
 WHERE 4 = (
@@ -310,9 +306,9 @@ WHERE 4 = (
  FROM Worker W2
  WHERE W2.Salary >= W1.Salary
  );
-
-Use the following generic method to find the nth highest salary without using TOP or limit.
-
+```
+#### Use the following generic method to find the nth highest salary without using TOP or limit.
+```sql
 SELECT Salary
 FROM Worker W1
 WHERE n-1 = (
@@ -320,151 +316,94 @@ WHERE n-1 = (
  FROM Worker W2
  WHERE W2.Salary >= W1.Salary
  );
-
+```
 ### Q-35. Write an SQL query to fetch the list of employees with the same salary.
-
-Ans.
-
-The required query is:
-
+```sql
 Select distinct W.WORKER_ID, W.FIRST_NAME, W.Salary 
 from Worker W, Worker W1 
 where W.Salary = W1.Salary 
 and W.WORKER_ID != W1.WORKER_ID;
-
+```
 ### Q-36. Write an SQL query to show the second-highest salary from a table.
-
-Ans.
-
-The required query is:
-
-Select max(Salary) from Worker 
-where Salary not in (Select max(Salary) from Worker);
+```sql
+Select max(Salary) from Worker
+``` 
+#### where Salary not in (Select max(Salary) from Worker);
 
 ### Q-37. Write an SQL query to show one row twice in the results from a table.
-
-Ans.
-
-The required query is:
-
+```sql
 select FIRST_NAME, DEPARTMENT from worker W where W.DEPARTMENT='HR' 
 union all 
 select FIRST_NAME, DEPARTMENT from Worker W1 where W1.DEPARTMENT='HR';
-
+```
 ### Q-38. Write an SQL query to fetch intersecting records of two tables.
 
-Ans.
-
-The required query is:
-
+```sql
 (SELECT * FROM Worker)
 INTERSECT
 (SELECT * FROM WorkerClone);
-
+```
 ### Q-39. Write an SQL query to fetch the first 50% of records from a table.
-
-Ans.
-
-The required query is:
-
+```sql
 SELECT *
 FROM WORKER
 WHERE WORKER_ID <= (SELECT count(WORKER_ID)/2 from Worker);
-
-Practicing SQL query questions is a great way to improve your understanding of the language and become more proficient in using it. However, in addition to improving your technical skills, practicing SQL query questions can also help you to advance your career. Many employers are looking for candidates who have strong SQL skills, so being able to demonstrate your proficiency in the language can give you a competitive edge.
+```
+#### Practicing SQL query questions is a great way to improve your understanding of the language and become more proficient in using it. However, in addition to improving your technical skills, practicing SQL query questions can also help you to advance your career.
+#### Many employers are looking for candidates who have strong SQL skills, so being able to demonstrate your proficiency in the language can give you a competitive edge.
 ### Q-40. Write an SQL query to fetch the departments that have less than five people in them.
-
-Ans.
-
-The required query is:
-
+```sql
 SELECT DEPARTMENT, COUNT(WORKER_ID) as 'Number of Workers' FROM Worker GROUP BY DEPARTMENT HAVING COUNT(WORKER_ID) < 5;
-
+```
 ### Q-41. Write an SQL query to show all departments along with the number of people in there.
-
-Ans.
-
-The following query returns the expected result:
-
+```sql
 SELECT DEPARTMENT, COUNT(DEPARTMENT) as 'Number of Workers' FROM Worker GROUP BY DEPARTMENT;
-
+```
 ### Q-42. Write an SQL query to show the last record from a table.
-
-Ans.
-
-The following query will return the last record from the Worker table:
-
+```sql
 Select * from Worker where WORKER_ID = (SELECT max(WORKER_ID) from Worker);
-
+```
 ### Q-43. Write an SQL query to fetch the first row of a table.
-
-Ans.
-
-The required query is:
-
+```sql
 Select * from Worker where WORKER_ID = (SELECT min(WORKER_ID) from Worker);
-
+```
 ### Q-44. Write an SQL query to fetch the last five records from a table.
-
-Ans.
-
-The required query is:
-
+```sql
 SELECT * FROM Worker WHERE WORKER_ID <=5
 UNION
 SELECT * FROM (SELECT * FROM Worker W order by W.WORKER_ID DESC) AS W1 WHERE W1.WORKER_ID <=5;
-
+```
 ### Q-45. Write an SQL query to print the name of employees having the highest salary in each department.
 
-Ans.
-
-The required query is:
-
+```sql
 SELECT t.DEPARTMENT,t.FIRST_NAME,t.Salary from(SELECT max(Salary) as TotalSalary,DEPARTMENT from Worker group by DEPARTMENT) as TempNew 
 Inner Join Worker t on TempNew.DEPARTMENT=t.DEPARTMENT 
  and TempNew.TotalSalary=t.Salary;
-
+```
 ### Q-46. Write an SQL query to fetch three max salaries from a table.
-
-Ans.
-
-The required query is:
-
+```sql
 SELECT distinct Salary from worker a WHERE 3 >= (SELECT count(distinct Salary) from worker b WHERE a.Salary <= b.Salary) order by a.Salary desc;
-
+```
 ### Q-47. Write an SQL query to fetch three min salaries from a table.
 
-Ans.
-
-The required query is:
-
+```sql
 SELECT distinct Salary from worker a WHERE 3 >= (SELECT count(distinct Salary) from worker b WHERE a.Salary >= b.Salary) order by a.Salary desc;
-
+```
 ### Q-48. Write an SQL query to fetch nth max salaries from a table.
-
-Ans.
-
-The required query is:
-
+```sql
 SELECT distinct Salary from worker a WHERE n >= (SELECT count(distinct Salary) from worker b WHERE a.Salary <= b.Salary) order by a.Salary desc;
-
+```
 ### Q-49. Write an SQL query to fetch departments along with the total salaries paid for each of them.
 
-Ans.
-
-The required query is:
-
+```sql
  SELECT DEPARTMENT, sum(Salary) from worker group by DEPARTMENT;
-
+```
 ### Q-50. Write an SQL query to fetch the names of workers who earn the highest salary.
 
-Ans.
-
-The required query is:
-
+```sql
 SELECT FIRST_NAME, SALARY from Worker WHERE SALARY=(SELECT max(SALARY) from Worker);
+```
 
-Summary – Master SQL Queries with 50 Practice Questions and Answers.
 
-We hope you enjoyed solving the SQL exercises and learned something new along the way.
+## We hope you enjoyed solving the SQL exercises and learned something new along the way.
 
