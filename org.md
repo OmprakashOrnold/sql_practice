@@ -214,34 +214,28 @@ SELECT * FROM Worker WHERE MOD (WORKER_ID, 2) = 0;
 SELECT * INTO WorkerClone FROM Worker;
 ```
 
-The general way to clone a table without information is:
+#### The general way to clone a table without information is:
 ```sql
 SELECT * INTO WorkerClone FROM Worker WHERE 1 = 0;
-
-An alternate way to clone a table (for MySQL) without data is:
+```
+#### An alternate way to clone a table (for MySQL) without data is:
 ```sql
 CREATE TABLE WorkerClone LIKE Worker;
-
+```
 ### Q-29. Write an SQL query to fetch intersecting records of two tables.
 
-Ans.
-
-The required query is:
 ```sql
 (SELECT * FROM Worker)
 INTERSECT
 (SELECT * FROM WorkerClone);
-
+```
 ### Q-30. Write an SQL query to show records from one table that another table does not have.
 
-Ans.
-
-The required query is:
 ```sql
 SELECT * FROM Worker
 MINUS
 SELECT * FROM Title;
-
+```
 ### Q-31. Write an SQL query to show the current date and time.
 
 #### The following MySQL query returns the current date:
